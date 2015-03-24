@@ -27,8 +27,7 @@ if ($action == 'part3') {
     if (!$code) { show_error("code cannot be empty"); }
     
     $secret_key = file_get_contents(md5($email));
-    $oneCode = $ga->getCode($secret_key);
-    $checkResult = $ga->verifyCode($secret_key, $oneCode, 2);    // 2 = 2*30sec clock tolerance
+    $checkResult = $ga->verifyCode($secret_key, $code, 2);    // 2 = 2*30sec clock tolerance
     
     if ($checkResult) {
         echo "Congratulations! Login successful.";
