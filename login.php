@@ -49,12 +49,15 @@ if ($action == 'part3') {
 
         } else { // new registration
             $secret_key = $ga->createSecret();
+            $account = $email.'-'.$app_name;
             file_put_contents(md5($email), $secret_key);
             echo "This is your first time using $app_name.<br/>";
             echo "Scan the QR code below with Google Authenticator app.<br/>";
-            $qrCodeUrl = $ga->getQRCodeGoogleUrl($email.'-'.$app_name, $secret_key);
+            $qrCodeUrl = $ga->getQRCodeGoogleUrl($account, $secret_key);
             echo "<img src='$qrCodeUrl' /><br />";
-            echo "or enter this code manually into Google Authenticator : $secret_key<br/>";
+            echo "or enter this code manually into Google Authenticator<br/>";
+            echo "Your Account : $account<br/>";
+            echo "Your Key : $secret_key<br/>";
             echo "When you are ready, click the button below.<br />";
             echo "<form action='login.php?action=part2' method='post'>";
             echo "<input type='hidden' name='email' value='$email' />";
